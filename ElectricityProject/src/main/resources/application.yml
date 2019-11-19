@@ -1,0 +1,30 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:mysql://rm-wz945r62i2q3gk936do.mysql.rds.aliyuncs.com/store?characterEncoding=utf-8
+    username: root
+    password: WAtangyuan321
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+mybatis:
+  type-aliases-package: com.example.demo.entity
+  mapper-locations:
+  - classpath:mapper/*.xml
+logging:
+  level:
+    test:
+      dao: debug
+file:
+  staticAccessPath: /upload/**
+  uploadFolder: F://upload/ #文件存放目录
+      
+
+      
+
+        
+    

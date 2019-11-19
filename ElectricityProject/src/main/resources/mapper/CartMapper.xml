@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.yuanlei.CartsMapper">
+
+	<resultMap type="com.example.demo.entity.Shoppingtrolley" id="CarMapper">
+	<id column="id" property="id" />
+	<result column="userid" property="userid"/>
+	<result column="productid" property="productid"/>
+	<result column="productmodel" property="productmodel"/>
+	<result column="productnum" property="productnum"/>
+	<result column="pimg" property="product.pimg"/>
+	<result column="discount" property="product.discount"/>
+	<result column="title" property="product.title"/>
+	<result column="id" property="product.id"/>
+	<result column="price" property="product.price"/>
+	<result column="repertorynum" property="repertory.repertorynum"/>
+	<result column="productmodel" property="repertory.productmodel"/>
+	</resultMap>
+	
+	<!-- <resultMap type="com.ysd.entity.product" id="productMapper">
+	<id column="id" property="id" />
+	<result column="title" property="title"/>
+	<result column="price" property="price"/>
+	<result column="salesvolume" property="salesvolume"/>
+	<result column="pageview" property="pageview"/>
+	<result column="storeproducttypeid" property="storeproducttypeid"/>
+	<result column="discount" property="discount"/>
+	<result column="sales" property="sales"/>
+	<result column="url" property="productimg.url"/>
+	</resultMap> -->
+
+	<!-- 查询购物车 -->
+	<select id="selectShoppingtrolley" parameterType="_int" resultMap="CarMapper">
+	select sr.productnum,pd.id,pd.discount,pd.title,pd.price,sr.productmodel,pd.pimg
+	 from shoppingtrolley sr,`user` ur,product pd
+	 where sr.productid=pd.id and sr.userid=ur.id and ur.id=1
+
+	</select>
+	<select id="selectRepertory" parameterType="repertory" resultType="_int">
+	select repertorynum from repertory where productid=1 and productmodel="xxl"
+	</select>
+	
+	<select id="selectProductBypid" parameterType="_int" resultType="product">
+		select * from product where id=#{pid}
+	</select>
+	
+	<select id="selectProductImgBypid" parameterType="_int" resultType="productimg">
+		select url from productimg where productid=#{pid}
+	</select>
+	
+	<select id="selectaddress" parameterType="_int" resultType="useraddress">
+	select * from useraddress ud,`user` ur where ur.id=ud.userid and ur.id=1 and ud.state=1
+	</select>
+	
+	<select id="selectAlladdress" parameterType="_int" resultType="useraddress">
+	select * from useraddress ud,`user` ur where ur.id=ud.userid and ur.id=1
+	</select>
+</mapper>
